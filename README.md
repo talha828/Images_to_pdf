@@ -1,8 +1,33 @@
+**Warning**
+
+ this project is now in Developement Mood
+
 # image_to_pdf
 
-A new Flutter project.
-
 ## Getting Started
+
+This is Flutter simple package where you can simple convert your images Into Single PDf.
+
+Add following dependencies to you pubspec.yaml file 
+
+```dart 
+dependencies:
+  flutter:
+    sdk: flutter
+  image_to_pdf_converter:
+    git:
+      url: https://github.com/talha828/Images_to_pdf
+      path: packages/image_to_pdf_converter
+```       
+
+provide a image list to constructor
+
+```dart
+ await  ImageToPdf.imageList(data.fileList) 
+ ```
+ 
+ in output you get Document convert them in file and use it.
+
 
 This project is a starting point for a Flutter application.
 
