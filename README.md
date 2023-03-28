@@ -1,7 +1,3 @@
-**Warning**
-
- this project is now in Developement Mood
-
 # image_to_pdf
 
 ## Getting Started
