@@ -3,19 +3,19 @@ part of image_to_pdf_converter;
 
 
 class ImageToPdf {
-  static Future<dynamic> imageList(List<File?> list) async {
-    if (list.isEmpty) {
-      throw "please provide valid String";
+  static Future<dynamic> imageList({required List<File?> listOfFiles}) async {
+    if (listOfFiles.isEmpty) {
+      throw "Your List is Empty";
     } else {
       final pdf = pw.Document();
-      for (var image in list) {
+      for (var image in listOfFiles) {
         var pdfImage = pw.MemoryImage(
           image!.readAsBytesSync(),
         );
         pdf.addPage(
           pw.Page(
             build: (pw.Context context) {
-              return pw.Image(pdfImage); // Center
+              return pw.Image(pdfImage,fit:pw.BoxFit.contain); // Center
             },
           ),
         );

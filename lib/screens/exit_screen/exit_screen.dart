@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 import 'package:image_to_pdf/constant/constant.dart';
 import 'package:image_to_pdf/logic/logic.dart';
 import 'package:open_filex/open_filex.dart';
+import 'package:document_file_save_plus/document_file_save_plus.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_share/flutter_share.dart';
 
 
 class ExitScreen extends StatefulWidget {
@@ -56,7 +59,7 @@ class _ExitScreenState extends State<ExitScreen> {
                       borderRadius: BorderRadius.circular(width * 0.01)
                     ),
                     child: TextField(
-
+                      controller: controller,
                       decoration: InputDecoration(
                       contentPadding: EdgeInsets.symmetric(horizontal: width * 0.04,),
                         hintText: "Untitled",
@@ -79,14 +82,22 @@ class _ExitScreenState extends State<ExitScreen> {
                 ),
                 const Divider(),
                 ListTile(
-                  onTap: (){},
+                  onTap: ()async{
+                    if(controller.text.isNotEmpty){
+                      await DocumentFileSavePlus.saveFile(data.pdf.value!.readAsBytesSync(), "${controller.text}.pdf", "appliation/pdf");
+
+                      Fluttertoast.showToast(msg: "File successfully saved");
+                    }else{
+                      Fluttertoast.showToast(msg: "Please give the name your file");
+                    }
+                  },
                   leading: const Icon(Icons.save_alt),
                   title: Text("Save File",style: TextStyle(foreground: Paint()..shader = linearGradient),),
                   trailing:const  Icon(Icons.arrow_forward_ios_outlined),
                 ),
                 const Divider(),
                 ListTile(
-                  onTap: (){},
+                  onTap: ()=>shareFile(data.pdf.value!.path),
                   leading: const Icon(Icons.share),
                   title: Text("Share File",style: TextStyle(foreground: Paint()..shader = linearGradient),),
                   trailing:const Icon(Icons.arrow_forward_ios_outlined),
@@ -96,6 +107,14 @@ class _ExitScreenState extends State<ExitScreen> {
             ),
           ) ,
         )
+    );
+  }
+  Future<void> shareFile(String path) async {
+    await DocumentFileSavePlus.saveFile(data.pdf.value!.readAsBytesSync(), "example.pdf", "appliation/pdf");
+    await FlutterShare.shareFile(
+      title: "${controller.text}.pdf",
+      text: 'Image to PDF',
+      filePath: path,
     );
   }
 }

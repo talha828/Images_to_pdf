@@ -58,6 +58,8 @@ dev_dependencies:
   open_filex: ^4.1.1
   fluttertoast: ^8.0.9
   flutter_file_saver: any
+  document_file_save_plus:
+  flutter_share:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

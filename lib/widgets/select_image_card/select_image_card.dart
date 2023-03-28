@@ -35,12 +35,15 @@ class SelectImageCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              IconButton(
-                onPressed: () {},
-                icon: FaIcon(
-                  FontAwesomeIcons.upload,
-                  color: themeColor2,
-                  size: width * 0.1,
+              IgnorePointer(
+                ignoring: true,
+                child: IconButton(
+                  onPressed: () {},
+                  icon: FaIcon(
+                    FontAwesomeIcons.upload,
+                    color: themeColor2,
+                    size: width * 0.1,
+                  ),
                 ),
               ),
               Text(
