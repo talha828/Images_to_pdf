@@ -1,7 +1,11 @@
 part of image_to_pdf_converter;
 
 class ImageToPdf {
-  static Future<dynamic> imageList({required List<File?> listOfFiles}) async {
+  /// fileName should be without any extension, e.g., "my_pdf"
+  /// Example usage:
+  /// await ImageToPdf.imageList(listOfFiles: files, fileName: "my_pdf");
+  static Future<dynamic> imageList(
+      {required List<File?> listOfFiles, String? fileName}) async {
     if (listOfFiles.isEmpty) {
       throw "Your List is Empty";
     } else {
@@ -19,7 +23,7 @@ class ImageToPdf {
         );
       }
       Directory appDocDir = await getApplicationSupportDirectory();
-      final file = File("${appDocDir.path}/example.pdf");
+      final file = File("${appDocDir.path}/${fileName ?? 'example'}.pdf");
       final bytes = await pdf.save();
       return await file.writeAsBytes(bytes, flush: true);
     }
